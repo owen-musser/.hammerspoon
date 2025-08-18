@@ -63,30 +63,14 @@ hs.hotkey.bind(hyper, "m", function()
     end
 end)
 
+hs.hotkey.bind(hyper, "l", function()
+  hs.caffeinate.lockScreen()
+end)
+
 -- =================================================================
 -- APPLICATION SHORTCUTS
 -- =================================================================
 
--- 4. New hotkey to open Finder at the user's home directory
 hs.hotkey.bind(hyper, "h", function()
-  hs.fs.open(os.getenv("HOME"))
-end)
-
--- 5. Native Hammerspoon hotkey to clear all notifications
-hs.hotkey.bind(hyper, "c", function()
-  local notificationCenter = hs.uielement.applications("NotificationCenter")
-  if notificationCenter and notificationCenter:count() > 0 then
-    local clearButton = notificationCenter[1]:findFirst({
-        element = "button",
-        title = "Clear All"
-    })
-    if clearButton then
-      clearButton:performAction("AXPress")
-      hs.alert.show("Notifications cleared.")
-    else
-      hs.alert.show("Clear All button not found.")
-    end
-  else
-    hs.alert.show("Notification Center not found.")
-  end
+  hs.execute("open ~")
 end)
