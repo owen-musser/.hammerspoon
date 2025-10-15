@@ -1,23 +1,10 @@
--- =================================================================
--- Hammerspoon Configuration File
--- File: ~/.hammerspoon/init.lua
--- =================================================================
-
--- 1. Define the Hyper Key
--- This combines Control, Alt (Option), Shift, and Command (GUI)
 local hyper = {"ctrl", "alt", "shift", "cmd"}
 
--- 2. Define a hotkey to reload the config with a notification
 hs.hotkey.bind(hyper, "r", function()
   hs.reload()
   hs.notify.new({title="Hammerspoon", informativeText="Reloaded"}):send()
 end)
 
--- =================================================================
--- WINDOW MANAGEMENT - TILING
--- =================================================================
-
--- Define a reusable function to tile the current window
 local function tile_window(direction)
   local win = hs.window.focusedWindow()
   if not win then
@@ -49,13 +36,11 @@ local function tile_window(direction)
   win:setFrame(new_frame)
 end
 
--- 3. Bind the hotkeys for tiling
 hs.hotkey.bind(hyper, "left", function() tile_window("left") end)
 hs.hotkey.bind(hyper, "right", function() tile_window("right") end)
 hs.hotkey.bind(hyper, "up", function() tile_window("up") end)
 hs.hotkey.bind(hyper, "down", function() tile_window("down") end)
 
--- Optional: Maximize window with Hyper + M
 hs.hotkey.bind(hyper, "m", function()
     local win = hs.window.focusedWindow()
     if win then
@@ -66,10 +51,6 @@ end)
 hs.hotkey.bind(hyper, "l", function()
   hs.caffeinate.lockScreen()
 end)
-
--- =================================================================
--- APPLICATION SHORTCUTS
--- =================================================================
 
 hs.hotkey.bind(hyper, "h", function()
   hs.execute("open ~")
